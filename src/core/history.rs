@@ -1,6 +1,8 @@
 use crate::core::game::{game_grids_are_identical, Cellule};
+#[allow(dead_code)]
+use log::*;
 
-const MAXIMUM_LOOP_TURN_COUNT: usize = 15;
+const MAXIMUM_LOOP_TURN_COUNT: usize = 1600;
 
 pub struct History {
   pub previous_steps: Vec<Vec<Cellule>>,
@@ -11,6 +13,7 @@ impl History {
     let mut in_endless_loop = false;
     for previous_step in self.previous_steps.iter() {
       if game_grids_are_identical(previous_step.to_vec(), current_grid.clone()) {
+        info!("IN A LOOP: Game grids are identical.");
         in_endless_loop = true;
       }
     }
